@@ -1,0 +1,4 @@
+networkx~=2.8.1.dev0
+matplotlib~=3.5.2
+numpy~=1.22.3
+scipy~=1.8.0
