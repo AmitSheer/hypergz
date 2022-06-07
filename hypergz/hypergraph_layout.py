@@ -3,6 +3,7 @@ import numpy as np
 
 __all__ = [
     "hypergraph",
+    "hyperedge",
     "complete_algorithm",
     "cycle_algorithm",
     "star_algorithm",

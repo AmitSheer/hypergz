@@ -15,12 +15,14 @@ from scipy.spatial import ConvexHull
 
 import networkx as nx
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 
 
 import logging
 
 # create and configure logger
-import hypergraph_layout
+from hypergz import hypergraph, hyperedge, complete_algorithm, wheel_algorithm, star_algorithm
+
 
 logging.basicConfig(filename='my_logging.log', level=logging.INFO)
 logger = logging.getLogger()
@@ -295,7 +297,7 @@ def random_color(brightness_threshold=0.2):
 
 
 # @nx.not_implemented_for("directed")
-def force_directed_hyper_graphs_using_social_and_gravity_scaling(G: hypergraph_layout.hypergraph,
+def force_directed_hyper_graphs_using_social_and_gravity_scaling(G: hypergraph,
                                                                  iterations=50, threshold=70e-4, centrality=None,
                                                                  graph_type=None, gravity=6, seed=None, title=None,
                                                                  fig=False):
@@ -366,7 +368,7 @@ def force_directed_hyper_graphs_using_social_and_gravity_scaling(G: hypergraph_l
     >>> E3 = hyperedge([1, 3, 4])
     >>> E4 = hyperedge([1])
     >>> G = hypergraph([1, 2, 3, 4, 5, 6], [E1, E2,  E4])
-    >>> force_directed_hyper_graphs_using_social_and_gravity_scaling(G, 20, graph_type=hypergraph_layout.star_algorithm, seed=1)
+    >>> force_directed_hyper_graphs_using_social_and_gravity_scaling(G, 20, graph_type=star_algorithm, seed=1)
 
     """
     import matplotlib.pyplot as plt
@@ -377,7 +379,7 @@ def force_directed_hyper_graphs_using_social_and_gravity_scaling(G: hypergraph_l
     import math
 
     if graph_type is None:
-        graph_type = hypergraph_layout.complete_algorithm
+        graph_type = complete_algorithm
     logger.info(f'graph type to convert hyper-graph to: {graph_type}')
     g: nx.Graph = graph_type(G)
     logger.info(f'generated graph:'
@@ -387,10 +389,11 @@ def force_directed_hyper_graphs_using_social_and_gravity_scaling(G: hypergraph_l
     pos = force_directed(G=g, seed=seed, iterations=iterations, threshold=threshold, centrality=centrality,
                          gravity=gravity)
     logger.info(f'positions of nodes: {pos}')
-    if graph_type is hypergraph_layout.star_algorithm or graph_type is hypergraph_layout.wheel_algorithm:
+    if graph_type is star_algorithm or graph_type is wheel_algorithm:
         logger.info(f'removing addon central nodes')
         pos = pos[:len(pos) - len(G.hyperedges)]
-    fig, ax = plt.subplots()
+    fig = Figure()
+    ax = fig.subplots()
     logger.info('drawing proportional vertices as circles')
     size = plt.gcf().get_size_inches()[0]
     ax.scatter(pos[:, 0], pos[:, 1], s=size, zorder=2)
@@ -437,7 +440,7 @@ def force_directed_hyper_graphs_using_social_and_gravity_scaling(G: hypergraph_l
     for i, txt in enumerate(G.vertices):
         ax.annotate(txt, pos[i], color='blue')
     if title is not None:
-        plt.title(title)
+        fig.title(title)
     # plt.show()
     if fig:
         return fig
