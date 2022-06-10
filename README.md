@@ -7,7 +7,7 @@ $ pip install hypergz
 
 <h1> Try the algorithm </h1>
 
-To run your own example clock [here](http://amitsheer.pythonanywhere.com/)
+To run your own example click [here](http://amitsheer.pythonanywhere.com/)
 
 -----------
 
@@ -24,8 +24,9 @@ This algorithm offers 3 methods of social gravity:
  
  <h3> Example of different centralities in tree graph </h3>
 
-| Clossness | Betweeness |
-| ------------- | ------------- |
-| <p align="center"><img src="https://github.com/itay-rafee/Mathematical-Model-of-Malaria/blob/main/images/plot_1.png"/></p>  | <p align="center"><img src="https://github.com/itay-rafee/Mathematical-Model-of-Malaria/blob/main/images/plot_2.png"/></p>  |
- 
-  
+| Networkx | Clossness | Betweeness | Degree |
+| ------------- | ------------- | ------------- | ------------- |
+| <p align="center"><img src="[https://github.com/itay-rafee/Mathematical-Model-of-Malaria/blob/main/images/plot_1.png](https://user-images.githubusercontent.com/69470263/173134761-2e94912a-471b-4ed2-9f76-f09bfb31cff8.png)"/></p>  |
+<p align="center"><img src="[https://github.com/itay-rafee/Mathematical-Model-of-Malaria/blob/main/images/plot_2.png](https://user-images.githubusercontent.com/69470263/173134856-da240d0e-fa77-4545-bfcb-4d68d932e88a.png)"/></p>  
+<p align="center"><img src="[https://github.com/itay-rafee/Mathematical-Model-of-Malaria/blob/main/images/plot_2.png](https://user-images.githubusercontent.com/69470263/173134856-da240d0e-fa77-4545-bfcb-4d68d932e88a.png)"/></p>  
+<p align="center"><img src="[https://github.com/itay-rafee/Mathematical-Model-of-Malaria/blob/main/images/plot_2.png](https://user-images.githubusercontent.com/69470263/173134856-da240d0e-fa77-4545-bfcb-4d68d932e88a.png)"/></p>  
