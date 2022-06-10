@@ -13,7 +13,7 @@ To run your own example click [here](http://amitsheer.pythonanywhere.com/)
 
 <h1> Introuction </h1>
 This repository is an implementation of two algorithms:
-<h2> 1- Force-Directed Graph Drawing Using Social Gravity and Scaling </h2>
+<h2> 1) Force-Directed Graph Drawing Using Social Gravity and Scaling </h2>
 Link for atricle: https://arxiv.org/pdf/1209.0748.pdf
 
 Authors: 
@@ -40,7 +40,7 @@ This algorithm offers 3 methods of social gravity:
 | ------------- | ------------- |
 | <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173134909-6a92e31e-6ca3-4c01-9c58-264f64ee2077.png"/></p>  | <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173134954-3b4820a2-ac2d-4a7d-94c2-e7febfa6cbeb.png"/></p>  |
 
-<h2> 2- Hypergraph Drawing by Force-Directed Placement </h2>
+<h2> 2) Hypergraph Drawing by Force-Directed Placement </h2>
 Link for atricle: https://www.researchgate.net/publication/318823299_Hypergraph_Drawing_by_Force-Directed_Placement
 
 Authors: 
@@ -77,5 +77,5 @@ The team:
   - [Neta Roth](https://github.com/neta-r)
  
  ---------
- Credit for github styling:
+ Credit for readme styling:
   - [Almog Jakov](https://github.com/AlmogJakov)
