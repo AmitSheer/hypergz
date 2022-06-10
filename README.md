@@ -13,8 +13,12 @@ To run your own example click [here](http://amitsheer.pythonanywhere.com/)
 
 <h1> Introuction </h1>
 This repository is an implementation of two algorithms:
-<h2> Force-Directed Graph Drawing Using Social Gravity and Scaling </h2>
-This algorithm creates a pleasant drawing of a **graph** in a shape of a circle using attraction and rejection forces as well as social.
+<h2> 1- Force-Directed Graph Drawing Using Social Gravity and Scaling </h2>
+Link for atricle [here]()
+
+Authors: 
+
+This algorithm creates a pleasant drawing of a _graph_ in a shape of a circle using attraction and rejection forces as well as social.
 
 This algorithm offers 3 methods of social gravity:
 
@@ -31,3 +35,19 @@ This algorithm offers 3 methods of social gravity:
 | Betweeness | Degree |
 | ------------- | ------------- |
 | <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173134909-6a92e31e-6ca3-4c01-9c58-264f64ee2077.png"/></p>  | <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173134954-3b4820a2-ac2d-4a7d-94c2-e7febfa6cbeb.png"/></p>  |
+
+<h2> 2- Hypergraph Drawing by Force-Directed Placement </h2>
+Link for atricle [here]()
+
+Authors: 
+
+This algorithm creates a pleasant drawing of a _hyper-graph_ using any force-directed algrithm.
+We implemnted with the first algoritm.
+This algorithm offers 4 methods of converting hyper-graph to a graph (to apply force-directed algorithm on):
+  - _Complete graph_: connecting all vertices with all vertices.
+  - _Cycle graph_: connecting each vertex to the next vertex.
+  - _Star graph_: connecting all vertices to their center of Mass.
+  - _Wheel graph_: union of the _Cycle_ and the _Star_ graphs.
+  
+
+
