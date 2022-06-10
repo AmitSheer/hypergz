@@ -24,9 +24,10 @@ This algorithm offers 3 methods of social gravity:
  
  <h3> Example of different centralities in tree graph </h3>
 
-| Networkx | Clossness | Betweeness | Degree |
-| ------------- | ------------- | ------------- | ------------- |
-| <p align="center"><img src="[https://github.com/itay-rafee/Mathematical-Model-of-Malaria/blob/main/images/plot_1.png](https://user-images.githubusercontent.com/69470263/173134761-2e94912a-471b-4ed2-9f76-f09bfb31cff8.png)"/></p>  |
-<p align="center"><img src="[https://github.com/itay-rafee/Mathematical-Model-of-Malaria/blob/main/images/plot_2.png](https://user-images.githubusercontent.com/69470263/173134856-da240d0e-fa77-4545-bfcb-4d68d932e88a.png)"/></p>  
-<p align="center"><img src="[https://github.com/itay-rafee/Mathematical-Model-of-Malaria/blob/main/images/plot_2.png](https://user-images.githubusercontent.com/69470263/173134856-da240d0e-fa77-4545-bfcb-4d68d932e88a.png)"/></p>  
-<p align="center"><img src="[https://github.com/itay-rafee/Mathematical-Model-of-Malaria/blob/main/images/plot_2.png](https://user-images.githubusercontent.com/69470263/173134856-da240d0e-fa77-4545-bfcb-4d68d932e88a.png)"/></p>  
+| Networkx | Clossness |
+| ------------- | ------------- |
+| <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173134761-2e94912a-471b-4ed2-9f76-f09bfb31cff8.png"/></p>  | <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173134856-da240d0e-fa77-4545-bfcb-4d68d932e88a.png"/></p>  |
+
+| Betweeness | Degree |
+| ------------- | ------------- |
+| <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173134909-6a92e31e-6ca3-4c01-9c58-264f64ee2077.png"/></p>  | <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173134954-3b4820a2-ac2d-4a7d-94c2-e7febfa6cbeb.png"/></p>  |
