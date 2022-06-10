@@ -49,5 +49,11 @@ This algorithm offers 4 methods of converting hyper-graph to a graph (to apply f
   - _Star graph_: connecting all vertices to their center of Mass.
   - _Wheel graph_: union of the _Cycle_ and the _Star_ graphs.
   
+ <h3> Example of different graphs </h3>
+
+| Complete | Cycle | Betweeness | Degree |
+| ------------- | ------------- | ------------- | ------------- |
+| <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173139564-b3678721-5bb2-4911-b5ef-8a12c33e3fb2.png"/></p>  | <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173139724-585d2cd5-f741-48b5-81b7-c5f1ea90fa48.png"/></p>  | <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173139829-92926912-673a-4ae7-981a-e8abd29a1db8.png"/></p>  | <p align="center"><img src="https://user-images.githubusercontent.com/69470263/173139911-ff300e17-5590-4117-b510-8d540b4fea7b.png"/></p>  |
+
 
 
