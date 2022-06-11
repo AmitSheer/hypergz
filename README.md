@@ -75,7 +75,4 @@ This algorithm offers 4 methods of converting hyper-graph to a graph (to apply f
 The team:
   - [Amit Sheer Cohen](https://github.com/AmitSheer)
   - [Neta Roth](https://github.com/neta-r)
- 
- ---------
- Credit for readme styling:
-  - [Almog Jakov](https://github.com/AlmogJakov)
+
