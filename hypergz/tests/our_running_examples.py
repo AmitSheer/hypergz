@@ -1,9 +1,12 @@
+import sys
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 import networkx as nx
 
 from hypergz import hypergraph_layout
-from hypergz.hypergraph_layout import hyperedge, hypergraph
+from hypergz.hypergraph_layout import Hyperedge as hyperedge, Hypergraph as hypergraph
 from hypergz.our_layout import *
 
 

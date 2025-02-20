@@ -42,7 +42,7 @@ setuptools.setup(
         'Operating System :: OS Independent',
     ],
 
-    include_package_data=True,
+    include_package_data=True,  # Include all files in the package
 )
 
 # Build:

@@ -8,21 +8,28 @@ link: https://www.researchgate.net/publication/318823299_Hypergraph_Drawing_by_F
 
 Our names: Amit Sheer Cohen and Neta Roth'''
 
+# Standard library imports
 import math
+import logging
+from typing import List
 
+# Third-party imports
 import numpy as np
-from scipy.spatial import ConvexHull
-
 import networkx as nx
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
+from matplotlib.patches import Circle, Ellipse
+from scipy.spatial import ConvexHull
+from scipy.interpolate import splprep, splev
 
-
-import logging
-
-# create and configure logger
-from hypergz import hypergraph, hyperedge, complete_algorithm, wheel_algorithm, star_algorithm
-
+# Local imports
+from hypergz import (
+    Hypergraph, 
+    Hyperedge, 
+    complete_algorithm, 
+    wheel_algorithm, 
+    star_algorithm
+)
 
 logging.basicConfig(filename='my_logging.log', level=logging.INFO)
 logger = logging.getLogger()
@@ -33,7 +40,7 @@ __all__ = [
 ]
 
 
-def get_points_order(hull):
+def get_points_order(hull: ConvexHull) -> np.ndarray:
     order_by = hull.simplices[0]
     simplices = hull.simplices[1:]
     for i in range(hull.simplices.shape[0]):
@@ -109,12 +116,12 @@ def force_directed(G: nx.Graph, seed: int, iterations: int = 50, threshold=70e-4
         for v in range(len(A)):
             delta = (pos[v] - pos).T
             distance = np.sqrt((delta ** 2).sum(axis=0))
-            distance = np.where(distance < 0.01, 0.01, distance)
+            distance = np.maximum(distance, 0.01)
             Ai = A[v]
             # displacement "force"
             I[:, v] += calculate_position_change_for_vertice(Ai, center, delta, distance, gamma_t, k, mass, pos, v)
         length = np.sqrt((I ** 2).sum(axis=0))
-        length = np.where(length < 0.01, 0.1, length)
+        length = np.maximum(length, 0.01)
         delta_pos = (I * t / length).T
         pos += delta_pos
         # cool temperature
@@ -217,7 +224,7 @@ def in_hull(point, hull, tolerance=1e-12):
         for eq in hull.equations)
 
 
-def convex_pos(hull, proportion=400):
+def convex_pos(hull: ConvexHull, fig: Figure, proportion: int = 400) -> ConvexHull:
     """
        Parameters
        ----------
@@ -241,7 +248,7 @@ def convex_pos(hull, proportion=400):
         logger.info("computing a point which has proportional"
                     " distance from the given point and is on the linear equation")
 
-        dist = plt.gcf().get_size_inches()[0] / proportion
+        dist = fig.get_size_inches()[0] / proportion
         x0 = x[0] - dist * (math.sqrt(1 / (1 + m ** 2)))
         logger.info("adding the point which is *not* inside the convex hull")
         if not in_hull((x0, m * x0 + b), hull):
@@ -252,7 +259,7 @@ def convex_pos(hull, proportion=400):
     return ConvexHull(tmp_pos)
 
 
-def angle_between(x0, x1, y0, y1):
+def angle_between(x0: float, x1: float, y0: float, y1: float) -> float:
     """
          Parameters
          ----------
@@ -275,7 +282,7 @@ def angle_between(x0, x1, y0, y1):
     return math.degrees(math.atan2(yDiff, xDiff))
 
 
-def random_color(brightness_threshold=0.2):
+def random_color(brightness_threshold: float = 0.2) -> List[float]:
     """
        Parameters
        ----------
@@ -297,7 +304,7 @@ def random_color(brightness_threshold=0.2):
 
 
 # @nx.not_implemented_for("directed")
-def force_directed_hyper_graphs_using_social_and_gravity_scaling(G: hypergraph,
+def force_directed_hyper_graphs_using_social_and_gravity_scaling(G: Hypergraph,
                                                                  iterations=50, threshold=70e-4, centrality=None,
                                                                  graph_type=None, gravity=6, seed=None, title=None,
                                                                  fig=False):
@@ -392,21 +399,21 @@ def force_directed_hyper_graphs_using_social_and_gravity_scaling(G: hypergraph,
     if graph_type is star_algorithm or graph_type is wheel_algorithm:
         logger.info(f'removing addon central nodes')
         pos = pos[:len(pos) - len(G.hyperedges)]
-    fig = Figure()
+    fig = plt.figure(figsize=(8, 6))#Figure(figsize=(8, 6))
     ax = fig.subplots()
     logger.info('drawing proportional vertices as circles')
-    size = plt.gcf().get_size_inches()[0]
+    size = fig.get_size_inches()[0]
     ax.scatter(pos[:, 0], pos[:, 1], s=size, zorder=2)
     logger.info(f'generating the visual plot for the graph')
     for ei in G.hyperedges:
         logger.info(f'calculating convex hull for hyper-edge: {ei.vertices}')
         indexes = []
         for v in ei.vertices:
-            indexes.append(np.where(G.vertices == v)[0][0])
+            indexes.append(np.where(np.atleast_1d(G.vertices) == v)[0][0])
         if len(indexes) >= 3:
             hull = ConvexHull(pos[indexes])
             logger.info("Getting the edge positions")
-            new_hull = convex_pos(hull)
+            new_hull = convex_pos(hull, fig)
             logger.info("Getting the order of the edges")
             order = get_points_order(new_hull)
             tmp_pos = new_hull.points[order]
@@ -432,16 +439,16 @@ def force_directed_hyper_graphs_using_social_and_gravity_scaling(G: hypergraph,
         elif len(indexes) == 1:
             logger.info("Getting the circle size proportional to the canvas size")
             proportion = 200
-            size = plt.gcf().get_size_inches()[0] / proportion
-            draw_circle = plt.Circle((pos[indexes][0][0], pos[indexes][0][1]), size, fill=False, color=random_color())
+            size = fig.get_size_inches()[0] / proportion
+            draw_circle = Circle((pos[indexes][0][0], pos[indexes][0][1]), size, fill=False, color=random_color())
             ax.add_artist(draw_circle)
 
     logger.info("drawing vertices' numbers")
     for i, txt in enumerate(G.vertices):
         ax.annotate(txt, pos[i], color='blue')
     if title is not None:
-        fig.title(title)
-    # plt.show()
+        ax.set_title(title)
     if fig:
         return fig
     return pos
+

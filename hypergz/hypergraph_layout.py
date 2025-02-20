@@ -1,9 +1,12 @@
 import networkx as nx
 import numpy as np
+from dataclasses import dataclass
+from typing import List
+from numpy.typing import NDArray
 
 __all__ = [
-    "hypergraph",
-    "hyperedge",
+    "Hypergraph",
+    "Hyperedge",
     "complete_algorithm",
     "cycle_algorithm",
     "star_algorithm",
@@ -11,18 +14,26 @@ __all__ = [
 ]
 
 
-class hyperedge:
-    def __init__(self, vertices: list[int]):
-        self.vertices = np.array(vertices)
+@dataclass
+class Hyperedge:
+    vertices: NDArray[np.int_]
+    
+    @classmethod
+    def from_list(cls, vertices: List[int]) -> 'Hyperedge':
+        return cls(np.array(vertices))
 
 
-class hypergraph:
-    def __init__(self, vertices: list[int], hyperedges: list[hyperedge]):
-        self.vertices = np.array(vertices)
-        self.hyperedges = np.array(hyperedges)
+@dataclass
+class Hypergraph:
+    vertices: NDArray[np.int_]
+    hyperedges: NDArray[np.object_]
+    
+    @classmethod
+    def from_lists(cls, vertices: List[int], hyperedges: List[Hyperedge]) -> 'Hypergraph':
+        return cls(np.array(vertices), np.array(hyperedges))
 
 
-def complete_algorithm(h_graph: hypergraph):
+def complete_algorithm(h_graph: Hypergraph) -> nx.Graph:
     g = nx.Graph()
     for v in h_graph.vertices:
         g.add_node(v)
@@ -33,7 +44,7 @@ def complete_algorithm(h_graph: hypergraph):
     return g
 
 
-def cycle_algorithm(h_graph: hypergraph):
+def cycle_algorithm(h_graph: Hypergraph) -> nx.Graph:
     g = nx.Graph()
     for v in h_graph.vertices:
         g.add_node(v)
@@ -45,7 +56,7 @@ def cycle_algorithm(h_graph: hypergraph):
     return g
 
 
-def star_algorithm(h_graph: hypergraph):
+def star_algorithm(h_graph: Hypergraph) -> nx.Graph:
     g = nx.Graph()
     for v in h_graph.vertices:
         g.add_node(v)
@@ -56,7 +67,7 @@ def star_algorithm(h_graph: hypergraph):
     return g
 
 
-def wheel_algorithm(h_graph: hypergraph):
+def wheel_algorithm(h_graph: Hypergraph) -> nx.Graph:
     g = nx.Graph()
     for v in h_graph.vertices:
         g.add_node(v)
@@ -72,7 +83,7 @@ def wheel_algorithm(h_graph: hypergraph):
     return g
 
 
-def print_edges(g: nx.Graph):
+def print_edges(g: nx.Graph) -> None:
     for e in g.edges:
         print(f"{e[0]},{e[1]}")
 
@@ -82,10 +93,10 @@ if __name__ == '__main__':
     v2 = 2
     v3 = 3
     v4 = 4
-    E1 = hyperedge([v1, v2, v3, v4])
-    E2 = hyperedge([v3, v4])
-    E3 = hyperedge([v1])
-    G = hypergraph([v1, v2, v3, v4], [E1, E2, E3])
+    E1 = Hyperedge.from_list([v1, v2, v3, v4])
+    E2 = Hyperedge.from_list([v3, v4])
+    E3 = Hyperedge.from_list([v1])
+    G = Hypergraph.from_lists([v1, v2, v3, v4], [E1, E2, E3])
     g1 = complete_algorithm(G)
     print("complete graph:")
     print_edges(g1)
